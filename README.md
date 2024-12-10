@@ -1,6 +1,6 @@
 ## The reproduction explained
 
-- There is a catch all route at [lang]. In page.tsx we specify that the only possible value for [locale] is 'en' (i.e. only urls beginning with '/en' are allowed).
+- There is a dynamic route at [locale]. In page.tsx we specify that the only possible value for [locale] is 'en' (i.e. only urls beginning with '/en' are allowed).
 - In next.config.js we setup one redirect, to redirect '/' to '/home'
 - In middleware we setup logic to detect when the URL doesn't have a local in it, and rewrite the URL to include '/en'.
 - The expected behaviour here is that when the user visits '/' they should be redirected to '/home' and the middleware should receive the URL '/home'. This is the behaviour we see when run locally or deployed to Vercel.
