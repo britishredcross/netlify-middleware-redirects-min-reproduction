@@ -1,3 +1,11 @@
+## The reprodcution explained
+
+- There is a catch all route at [lang]. In page.tsx we specify that the only possible value for [locale] is 'en' (i.e. only urls beginning with '/en' are allowed).
+- In next.config.js we setup one redirect, to redirect '/' to '/home'
+- In middleware we setup logic to detect when the URL doesn't have a local in it, and rewrite the URL to include '/en'.
+- The expected behaviour here is that when the user visits '/' they should be redirected to '/home' and the middleware should receive the URL '/home'. This is the behaviour we see when run locally or deployed to Vercel.
+- The actual behaviour when deployed to Netlify is that the when the user visits '/' they get redirected to the 404 page. We believe this is because the middleware runs first, rewriting the URL to '/en'. But since there's no redirect that has '/en' as the source, the user isn't redirected and because there's no page at '/en' they're presented with the 404 page.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
